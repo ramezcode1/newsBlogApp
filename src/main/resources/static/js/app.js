@@ -1,4 +1,6 @@
-let url = 'http://localhost:8080/news';
+//const BASE_URL = 'http://localhost:8080';   //Local
+const BASE_URL = 'https://news-blog-app.herokuapp.com';   //Production
+let url = `${BASE_URL}/news`;
 let articles = [];
 let container = document.querySelector('#articles');
 
@@ -62,7 +64,7 @@ searchForm.addEventListener("submit", e => {
     e.preventDefault();
     let query = document.querySelector(".search-input").value;
     if (query.trim() !== '') {
-        url = 'http://localhost:8080/news/search?q=' + query;
+        url = `${BASE_URL}/news/search?q=${query}`;
         renderArticles(url);
     }
 });
@@ -72,7 +74,7 @@ advanceBtn.addEventListener("click", () => {
     let category = document.querySelector("#category").value;
     let language = document.querySelector("#language").value;
     if (category !== "" || language !== "") {
-        url = `http://localhost:8080/news/advanced?category=${category}&language=${language}`;
+        url = `${BASE_URL}/news/advanced?category=${category}&language=${language}`;
         renderArticles(url);
     }
 });
@@ -80,7 +82,7 @@ advanceBtn.addEventListener("click", () => {
 const homeLink = document.querySelector(".navbar-brand");
 homeLink.addEventListener("click", (e) => {
     e.preventDefault();
-    url = 'http://localhost:8080/news';
+    url = `${BASE_URL}/news`;
     renderArticles(url);
 });
 
@@ -89,7 +91,7 @@ container.addEventListener("click", (e) => {
         let id = e.target.dataset.id;
         let article = articles.find(article => article.id == id);
 
-        fetch('http://localhost:8080/news/save', {
+        fetch(`${BASE_URL}/news/save`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -104,6 +106,6 @@ container.addEventListener("click", (e) => {
 const savedArticle = document.querySelector(".saved-article");
 savedArticle.addEventListener("click", e => {
     e.preventDefault();
-    url = "http://localhost:8080/news/saved/articles";
+    url = `${BASE_URL}/news/saved/articles`;
     renderArticles(url);
 });
