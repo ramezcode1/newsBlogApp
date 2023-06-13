@@ -19,6 +19,7 @@ public class Article {
     private String sourceName;
     private String author;
     private String title;
+    @Column(length = 1020)
     private String description;
     private String url;
     private String urlToImage;

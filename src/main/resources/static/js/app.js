@@ -23,12 +23,12 @@ async function getArticles(url) {
 
 async function renderArticles(url) {
     articles = await getArticles(url);
-    let html = '';
+    container.innerHTML = '';
     let i = 1;
     articles.forEach(article => {
-        if (article.description === null) {
+        /*if (article.description === null) {
             return;
-        }
+        }*/
         article.id = i;
         let htmlSegment =
             `<div class="col">
@@ -53,10 +53,9 @@ async function renderArticles(url) {
                 </div>
             </div>`;
 
-        html += htmlSegment;
+        container.innerHTML += htmlSegment;
         i++;
     });
-    container.innerHTML = html;
 }
 
 const searchForm = document.querySelector(".search-form");
@@ -98,7 +97,10 @@ container.addEventListener("click", (e) => {
             },
             body: JSON.stringify(article),
         })
-            .then((response) => console.log('Success:', response.status))
+            .then((response) => {
+                console.log('Success:', response.status);
+                alert("Article Saved Successfully");
+            })
             .catch((error) => console.error('Error:', error));
     }
 });
